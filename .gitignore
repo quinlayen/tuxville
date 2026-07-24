@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+.DS_STORE
+
+# Generated game world + live save state (built by zork.sh / play.sh)
+tuxville/
