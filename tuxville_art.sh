@@ -2,7 +2,7 @@
 # ============================================================
 #  The Ruins of Tuxville — ASCII Art & Color Definitions
 #  Sourced by tuxville.sh during world generation
-#  Borders use plain ASCII so columns stay aligned everywhere.
+#  Borders use plain ASCII; all box lines share a fixed width.
 # ============================================================
 
 R=$'\e[31m'; G=$'\e[32m'; Y=$'\e[33m'; B=$'\e[34m'
@@ -20,12 +20,12 @@ ${Y}              |            T U X V I L L E            |${N}
 ${Y}              |                                       |${N}
 ${Y}              |        T H E   R U I N S   O F        |${N}
 ${Y}              |                                       |${N}
-${Y}              |     A Linux Command Adventure     |${N}
+${Y}              |       A Linux Command Adventure       |${N}
 ${Y}              |                                       |${N}
 ${Y}              +---------------------------------------+${N}
 ${Y}              |###|       .................       |###|${N}
 ${Y}              |###|     . Command Adventure .     |###|${N}
-${Y}              |###|       .Linux Adventure.       |###|${N}
+${Y}              |###|      . Linux Adventure .      |###|${N}
 ${Y}              |###|       .................       |###|${N}
 ${Y}              +---+           #########           +---+${N}
 ${Y}              ===            ###########            ===${N}
@@ -88,8 +88,8 @@ ${DR}        #   #     #   #     #   #${N}
 ${DR}        # * #     # * #     # * #${N}
 ${DR}        #   #     #   #     #   #${N}
 ${DR}        #####     #####     #####${N}
-${DR}          |           |           |${N}
-${DR}          v  N   E   v  S   W   v${N}
+${DR}          |         |         |  ${N}
+${DR}          N         E    S    W  ${N}
 "
 
 # ── ART_RUNIC ──
@@ -186,7 +186,7 @@ ${C}         +--+--+--+--+--+--+${N}
 ${C}         |##|##|##|##|##|##|${N}
 ${C}         |##|##|##|##|##|##|${N}
 ${C}         +--+--+--+--+--+--+${N}
-${C}         ========================${N}
+${C}         =============================${N}
 ${C}         +------------+ +------------+${N}
 ${C}         | CODEX LEFT | | CODEX RIGHT|${N}
 ${C}         | (true?)    | | (false?)   |${N}

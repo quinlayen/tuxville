@@ -114,6 +114,14 @@ DRAGON_EOF
     sleep 0.15
 }
 
+# Welcome instruction boxes — fixed inner width 54 so borders stay aligned.
+# Content is plain (no ANSI inside) so printf padding matches the visible width.
+_banner_top()    { printf '    %s╔══════════════════════════════════════════════════════╗%s\n' "$BY" "$N"; }
+_banner_mid()    { printf '    %s╠══════════════════════════════════════════════════════╣%s\n' "$BY" "$N"; }
+_banner_bot()    { printf '    %s╚══════════════════════════════════════════════════════╝%s\n' "$BY" "$N"; }
+_banner_row()    { printf '    %s║%s%-54s%s║%s\n' "$BY" "$N" "$1" "$BY" "$N"; }
+_banner_blank()  { _banner_row ""; }
+
 print_welcome_banner() {
     local mode="${1:-new}"
     echo "${ART_WELCOME}"
@@ -124,87 +132,80 @@ print_welcome_banner() {
             source "$ROOT/.save_state"
             saved_room="${SAVE_ROOM:-}"
         fi
-        cat <<EOF
-
-    ${BY}╔══════════════════════════════════════════════════════╗${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}  ${BW}WELCOME BACK, ADVENTURER${N}                            ${BY}║${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}  Your world was preserved on disk. Progress lives    ${BY}║${N}
-    ${BY}║${N}  in the filesystem itself (inventory, locks, files). ${BY}║${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}╠══════════════════════════════════════════════════════╣${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}  ${BW}TO RESUME:${N}                                         ${BY}║${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}    ${G}1.${N} source tuxville/.game_functions.sh              ${BY}║${N}
-EOF
+        echo ""
+        _banner_top
+        _banner_blank
+        _banner_row "  WELCOME BACK, ADVENTURER"
+        _banner_blank
+        _banner_row "  Your world was preserved on disk. Progress lives"
+        _banner_row "  in the filesystem itself (inventory, locks, files)."
+        _banner_blank
+        _banner_mid
+        _banner_blank
+        _banner_row "  TO RESUME:"
+        _banner_blank
+        _banner_row "    1. source tuxville/.game_functions.sh"
         if [[ -n "$saved_room" && -d "$ROOT/$saved_room" ]]; then
-            cat <<EOF
-    ${BY}║${N}    ${G}2.${N} cd tuxville/${saved_room}                      ${BY}║${N}
-    ${BY}║${N}    ${G}3.${N} look                                           ${BY}║${N}
-EOF
+            _banner_row "    2. cd tuxville/${saved_room}"
         else
-            cat <<EOF
-    ${BY}║${N}    ${G}2.${N} cd tuxville/clearing   ${DW}(or last room)${N}         ${BY}║${N}
-    ${BY}║${N}    ${G}3.${N} look                                           ${BY}║${N}
-EOF
+            _banner_row "    2. cd tuxville/clearing   (or last room)"
         fi
-        cat <<EOF
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}  ${BW}SAVE / PROGRESS:${N}                                    ${BY}║${N}
-    ${BY}║${N}    ${C}save${N} ......... Snapshot room + quest flags        ${BY}║${N}
-    ${BY}║${N}    ${C}status${N} ....... Quest checklist                    ${BY}║${N}
-    ${BY}║${N}    ${C}whereami${N} ..... Show path inside the ruins         ${BY}║${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}  Fresh start anytime:  ${Y}bash tuxville.sh --new${N}            ${BY}║${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}╚══════════════════════════════════════════════════════╝${N}
-
-EOF
+        _banner_row "    3. look"
+        _banner_blank
+        _banner_row "  SAVE / PROGRESS:"
+        _banner_row "    save ......... Snapshot room + quest flags"
+        _banner_row "    status ....... Quest checklist"
+        _banner_row "    whereami ..... Show path inside the ruins"
+        _banner_blank
+        _banner_row "  Fresh start anytime:  bash tuxville.sh --new"
+        _banner_blank
+        _banner_row "  Tip: ./play.sh continues and loads helpers for you."
+        _banner_blank
+        _banner_bot
+        echo ""
         return
     fi
 
-    cat <<EOF
-
-    ${BY}╔══════════════════════════════════════════════════════╗${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}  Deep beneath the forest lie the ruins of Tuxville,  ${BY}║${N}
-    ${BY}║${N}  an underground city built by the ancient Order of   ${BY}║${N}
-    ${BY}║${N}  the Open Source. Their greatest treasure — the      ${BY}║${N}
-    ${BY}║${N}  ${BW}Diamond Kernel${N} — awaits the worthy.                 ${BY}║${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}╠══════════════════════════════════════════════════════╣${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}  ${BW}TO BEGIN YOUR ADVENTURE:${N}                            ${BY}║${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}    ${G}1.${N} source tuxville/.game_functions.sh              ${BY}║${N}
-    ${BY}║${N}    ${G}2.${N} cd tuxville/clearing                           ${BY}║${N}
-    ${BY}║${N}    ${G}3.${N} look                                           ${BY}║${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}  ${BW}GAME COMMANDS${N} (after sourcing):                     ${BY}║${N}
-    ${BY}║${N}    ${C}look${N} ......... Describe your surroundings         ${BY}║${N}
-    ${BY}║${N}    ${C}inventory${N} .... Check what you're carrying         ${BY}║${N}
-    ${BY}║${N}    ${C}take <file>${N} .. Pick up an item                    ${BY}║${N}
-    ${BY}║${N}    ${C}drop <file>${N} .. Put down an item                   ${BY}║${N}
-    ${BY}║${N}    ${C}hint${N} ......... Get a hint (hidden in some rooms)  ${BY}║${N}
-    ${BY}║${N}    ${C}status${N} ....... Check your quest progress          ${BY}║${N}
-    ${BY}║${N}    ${C}save${N} ......... Bookmark room + flags for resume   ${BY}║${N}
-    ${BY}║${N}    ${C}whereami${N} ..... Show path inside the ruins         ${BY}║${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}  ${BW}SAVING PROGRESS:${N}                                   ${BY}║${N}
-    ${BY}║${N}    The game world ${W}is${N} your save file — inventory,      ${BY}║${N}
-    ${BY}║${N}    permissions, and files persist on disk.           ${BY}║${N}
-    ${BY}║${N}    Quit anytime; run ${Y}bash tuxville.sh${N} to continue.       ${BY}║${N}
-    ${BY}║${N}    Use ${C}save${N} before quitting to remember your room.  ${BY}║${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}  ${BW}LINUX COMMANDS${N} (the real tools):                    ${BY}║${N}
-    ${BY}║${N}    ${Y}cd, ls, cat, grep, find, chmod, kill,${N} and more    ${BY}║${N}
-    ${BY}║${N}    Use these to solve puzzles and explore!           ${BY}║${N}
-    ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}╚══════════════════════════════════════════════════════╝${N}
-
-EOF
+    echo ""
+    _banner_top
+    _banner_blank
+    _banner_row "  Deep beneath the forest lie the ruins of Tuxville,"
+    _banner_row "  an underground city built by the ancient Order of"
+    _banner_row "  the Open Source. Their greatest treasure - the"
+    _banner_row "  Diamond Kernel - awaits the worthy."
+    _banner_blank
+    _banner_mid
+    _banner_blank
+    _banner_row "  TO BEGIN YOUR ADVENTURE:"
+    _banner_blank
+    _banner_row "    1. source tuxville/.game_functions.sh"
+    _banner_row "    2. cd tuxville/clearing"
+    _banner_row "    3. look"
+    _banner_blank
+    _banner_row "  Or simply run:  ./play.sh"
+    _banner_blank
+    _banner_row "  GAME COMMANDS (after sourcing / play.sh):"
+    _banner_row "    look ......... Describe your surroundings"
+    _banner_row "    inventory .... Check what you're carrying"
+    _banner_row "    take <file> .. Pick up an item"
+    _banner_row "    drop <file> .. Put down an item"
+    _banner_row "    hint ......... Get a hint (hidden in some rooms)"
+    _banner_row "    status ....... Check your quest progress"
+    _banner_row "    save ......... Bookmark room + flags for resume"
+    _banner_row "    whereami ..... Show path inside the ruins"
+    _banner_blank
+    _banner_row "  SAVING PROGRESS:"
+    _banner_row "    The game world is your save file - inventory,"
+    _banner_row "    permissions, and files persist on disk."
+    _banner_row "    Quit anytime; run bash tuxville.sh to continue."
+    _banner_row "    Use save before quitting to remember your room."
+    _banner_blank
+    _banner_row "  LINUX COMMANDS (the real tools):"
+    _banner_row "    cd, ls, cat, grep, find, chmod, kill, and more"
+    _banner_row "    Use these to solve puzzles and explore!"
+    _banner_blank
+    _banner_bot
+    echo ""
 }
 
 # ──────────────────────────────────────────────────────────────
@@ -324,10 +325,11 @@ inventory() {
     local items
     items=$(ls -A "$root/.inventory" 2>/dev/null)
     if [[ -z "$items" ]]; then
-        echo "  ║  (empty)                      ║"
+        echo "  ║  (empty)                       ║"
     else
         while IFS= read -r item; do
-            printf "  ║  %-28s║\n" "$item"
+            # Inner width 32 (matches top border)
+            printf "  ║  %-30s║\n" "$item"
         done <<< "$items"
     fi
     echo "  ╚════════════════════════════════╝"
@@ -451,7 +453,8 @@ status() {
     fi
 
     echo "  ╠══════════════════════════════════════╣"
-    printf "  ║  Progress: %d / %d quests complete       ║\n" "$done" "$total"
+    # Inner width 38 (matches top border)
+    printf "  ║  %-36s║\n" "Progress: ${done} / ${total} quests complete"
     if [[ $done -eq $total ]]; then
         echo "  ║                                      ║"
         echo "  ║    *** VICTORY! YOU HAVE WON! ***    ║"
@@ -511,18 +514,19 @@ SAVE_EOF
     echo "  ╔══════════════════════════════════════╗"
     echo "  ║              GAME SAVED              ║"
     echo "  ╠══════════════════════════════════════╣"
-    printf "  ║  Room: %-29s ║\n" "${rel:-.}"
-    printf "  ║  Time: %-29s ║\n" "$(date '+%Y-%m-%d %H:%M:%S')"
+    # Inner width 38 (matches top border)
+    printf "  ║  %-36s║\n" "Room: ${rel:-.}"
+    printf "  ║  %-36s║\n" "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo "  ╠══════════════════════════════════════╣"
     echo "  ║  Your inventory, locks, and files    ║"
     echo "  ║  are already on disk. To resume:     ║"
     echo "  ║                                      ║"
-    echo "  ║    bash tuxville.sh                      ║"
-    echo "  ║    source tuxville/.game_functions.sh║"
+    echo "  ║    ./play.sh                         ║"
+    echo "  ║    (or: bash tuxville.sh)            ║"
     if [[ -n "$rel" ]]; then
-        printf "  ║    cd tuxville/%-21s ║\n" "$rel"
+        printf "  ║  %-36s║\n" "Last room: tuxville/${rel}"
     else
-        echo "  ║    cd tuxville                       ║"
+        echo "  ║    start room: tuxville/clearing     ║"
     fi
     echo "  ║    look                              ║"
     echo "  ╚══════════════════════════════════════╝"
