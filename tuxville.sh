@@ -1,11 +1,11 @@
 #!/bin/bash
 # ============================================================
-#  The Ruins of Tuxville — A Zork-Inspired Linux Adventure
+#  The Ruins of Tuxville — A Linux Command Adventure
 # ============================================================
 #  Usage:
-#    bash zork.sh            # continue if world exists, else new
-#    bash zork.sh --new      # wipe and start a fresh game
-#    bash zork.sh --continue # resume existing world (error if none)
+#    bash tuxville.sh            # continue if world exists, else new
+#    bash tuxville.sh --new      # wipe and start a fresh game
+#    bash tuxville.sh --continue # resume existing world (error if none)
 # ============================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -14,7 +14,7 @@ cd "$SCRIPT_DIR" || exit 1
 # ──────────────────────────────────────────────────────────────
 #  Source art and color definitions
 # ──────────────────────────────────────────────────────────────
-source "$SCRIPT_DIR/zork_art.sh"
+source "$SCRIPT_DIR/tuxville_art.sh"
 
 # ──────────────────────────────────────────────────────────────
 #  Shorthand for the deep path (used throughout the script)
@@ -157,7 +157,7 @@ EOF
     ${BY}║${N}    ${C}status${N} ....... Quest checklist                    ${BY}║${N}
     ${BY}║${N}    ${C}whereami${N} ..... Show path inside the ruins         ${BY}║${N}
     ${BY}║${N}                                                      ${BY}║${N}
-    ${BY}║${N}  Fresh start anytime:  ${Y}bash zork.sh --new${N}            ${BY}║${N}
+    ${BY}║${N}  Fresh start anytime:  ${Y}bash tuxville.sh --new${N}            ${BY}║${N}
     ${BY}║${N}                                                      ${BY}║${N}
     ${BY}╚══════════════════════════════════════════════════════╝${N}
 
@@ -195,7 +195,7 @@ EOF
     ${BY}║${N}  ${BW}SAVING PROGRESS:${N}                                   ${BY}║${N}
     ${BY}║${N}    The game world ${W}is${N} your save file — inventory,      ${BY}║${N}
     ${BY}║${N}    permissions, and files persist on disk.           ${BY}║${N}
-    ${BY}║${N}    Quit anytime; run ${Y}bash zork.sh${N} to continue.       ${BY}║${N}
+    ${BY}║${N}    Quit anytime; run ${Y}bash tuxville.sh${N} to continue.       ${BY}║${N}
     ${BY}║${N}    Use ${C}save${N} before quitting to remember your room.  ${BY}║${N}
     ${BY}║${N}                                                      ${BY}║${N}
     ${BY}║${N}  ${BW}LINUX COMMANDS${N} (the real tools):                    ${BY}║${N}
@@ -215,7 +215,7 @@ case "${1:-}" in
     --new|-n)       MODE="new" ;;
     --continue|-c)  MODE="continue" ;;
     --help|-h)
-        echo "Usage: bash zork.sh [--new|--continue]"
+        echo "Usage: bash tuxville.sh [--new|--continue]"
         echo "  (default)  continue existing world, or create one if missing"
         echo "  --new      wipe tuxville/ and start a fresh adventure"
         echo "  --continue resume an existing world (fails if none)"
@@ -517,7 +517,7 @@ SAVE_EOF
     echo "  ║  Your inventory, locks, and files    ║"
     echo "  ║  are already on disk. To resume:     ║"
     echo "  ║                                      ║"
-    echo "  ║    bash zork.sh                      ║"
+    echo "  ║    bash tuxville.sh                      ║"
     echo "  ║    source tuxville/.game_functions.sh║"
     if [[ -n "$rel" ]]; then
         printf "  ║    cd tuxville/%-21s ║\n" "$rel"
@@ -533,7 +533,7 @@ FUNC_EOF
 
 if [[ "$MODE" == "continue" ]]; then
     if [[ ! -d "$ROOT/clearing" || ! -f "$ROOT/.game_functions.sh" ]]; then
-        echo "  No existing game found. Run: bash zork.sh --new"
+        echo "  No existing game found. Run: bash tuxville.sh --new"
         exit 1
     fi
     # Refresh helpers without wiping world state, then reattach dragon.
@@ -1610,8 +1610,8 @@ ${ART_TOWER_TOP}
     ${BY}══════════════════════════════════════════════════════${N}
 
     Run ${BW}'status'${N} to see your full quest checklist.
-    Want to play again?  Run:  ${BW}bash zork.sh --new${N}
-    Resume later anytime:       ${BW}bash zork.sh${N}  then ${BW}source${N} + ${BW}cd${N}
+    Want to play again?  Run:  ${BW}bash tuxville.sh --new${N}
+    Resume later anytime:       ${BW}bash tuxville.sh${N}  then ${BW}source${N} + ${BW}cd${N}
 
     ${BY}══════════════════════════════════════════════════════${N}
 

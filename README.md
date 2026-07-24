@@ -1,6 +1,6 @@
 # The Ruins of Tuxville
 
-A Zork-inspired text adventure that teaches **real Linux commands**.  
+A classic-style text adventure that teaches **real Linux commands**.  
 You explore by changing directories, read lore with `cat`, search with `grep` and `find`, open locks with `chmod`, and slay a dragon with `kill`.
 
 The game world is a folder tree. **Your progress is that folder** — inventory, permissions, and files stay on disk until you start a new game.
@@ -21,7 +21,7 @@ No install step. No root. No packages.
 
 ```bash
 cd tuxville_game          # this project folder
-chmod +x play.sh zork.sh  # once, if needed
+chmod +x play.sh tuxville.sh  # once, if needed
 ./play.sh
 ```
 
@@ -45,7 +45,7 @@ Type `exit` when you stop. Progress is kept.
 ## Manual start (without play.sh)
 
 ```bash
-bash zork.sh              # build or resume the world
+bash tuxville.sh              # build or resume the world
 source tuxville/.game_functions.sh
 cd tuxville/clearing
 look
@@ -79,7 +79,7 @@ You’ll land back in the room from `save` (if it still exists).
 | Check quest checklist | `status` |
 | See current path in the ruins | `whereami` |
 
-**Note:** Re-running `./play.sh --new` or `bash zork.sh --new` **deletes** the `tuxville/` world.
+**Note:** Re-running `./play.sh --new` or `bash tuxville.sh --new` **deletes** the `tuxville/` world.
 
 ---
 
@@ -139,8 +139,8 @@ Avoid spoilers online if you can; the game is built to teach by exploration.
 ```text
 tuxville_game/
   play.sh          # one-command launcher (recommended)
-  zork.sh          # builds / resumes the world
-  zork_art.sh      # ASCII art + colors
+  tuxville.sh          # builds / resumes the world
+  tuxville_art.sh      # ASCII art + colors
   README.md        # this file
   tuxville/        # generated game world (your save)
 ```

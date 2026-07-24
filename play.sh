@@ -45,14 +45,14 @@ esac
 
 # ── Ensure the world exists ──────────────────────────────────
 if [[ "$MODE" == "new" ]]; then
-    bash "$SCRIPT_DIR/zork.sh" --new
+    bash "$SCRIPT_DIR/tuxville.sh" --new
 elif [[ "$MODE" == "continue" ]]; then
-    bash "$SCRIPT_DIR/zork.sh" --continue
+    bash "$SCRIPT_DIR/tuxville.sh" --continue
 else
     if [[ -d "$SCRIPT_DIR/tuxville/clearing" && -f "$SCRIPT_DIR/tuxville/.game_functions.sh" ]]; then
-        bash "$SCRIPT_DIR/zork.sh" --continue
+        bash "$SCRIPT_DIR/tuxville.sh" --continue
     else
-        bash "$SCRIPT_DIR/zork.sh" --new
+        bash "$SCRIPT_DIR/tuxville.sh" --new
     fi
 fi
 

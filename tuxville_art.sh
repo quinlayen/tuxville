@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 #  The Ruins of Tuxville — ASCII Art & Color Definitions
-#  Sourced by zork.sh during world generation
+#  Sourced by tuxville.sh during world generation
 #  Borders use plain ASCII so columns stay aligned everywhere.
 # ============================================================
 
@@ -20,11 +20,11 @@ ${Y}              |            T U X V I L L E            |${N}
 ${Y}              |                                       |${N}
 ${Y}              |        T H E   R U I N S   O F        |${N}
 ${Y}              |                                       |${N}
-${Y}              |    A Zork-Inspired Linux Adventure    |${N}
+${Y}              |     A Linux Command Adventure     |${N}
 ${Y}              |                                       |${N}
 ${Y}              +---------------------------------------+${N}
 ${Y}              |###|       .................       |###|${N}
-${Y}              |###|       . Zork-Inspired .       |###|${N}
+${Y}              |###|     . Command Adventure .     |###|${N}
 ${Y}              |###|       .Linux Adventure.       |###|${N}
 ${Y}              |###|       .................       |###|${N}
 ${Y}              +---+           #########           +---+${N}
