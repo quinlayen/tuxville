@@ -9,15 +9,45 @@ The game world is a folder tree. **Your progress is that folder** — inventory,
 
 ## Requirements
 
-- **macOS or Linux**
+**Local play**
+
+- **macOS or Linux** (or Windows via [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) with Ubuntu)
 - **bash** (macOS ships with bash 3.2; that’s enough)
-- A normal terminal (Terminal.app, iTerm, VS Code terminal, etc.)
+- A normal terminal
 
 No install step. No root. No packages.
 
+**No Linux on your machine?** Use [Play in the browser (GitHub Codespaces)](#play-in-the-browser-github-codespaces) below.
+
 ---
 
-## Quick start
+## Play in the browser (GitHub Codespaces)
+
+You do **not** need Linux installed. You need a free [GitHub](https://github.com) account.
+
+1. Open this repository on GitHub: [quinlayen/tuxville](https://github.com/quinlayen/tuxville)
+2. Click **Code** → **Codespaces** → **Create codespace on main**  
+   (or use: [Open in Codespaces](https://codespaces.new/quinlayen/tuxville?quickstart=1))
+3. Wait for the cloud Linux environment to start (first time may take a minute)
+4. Open the **Terminal** panel (`` Ctrl+` `` or **Terminal → New Terminal**)
+5. Run:
+
+```bash
+./play.sh
+```
+
+### Whose Codespaces hours?
+
+- The game runs in **the player’s** Codespace, billed against **their** free quota — not the repo owner’s.
+- Example: if John Doe opens your repo in Codespaces, **John** uses **John’s** free hours.
+- Free personal accounts include a monthly Codespaces allowance (see [GitHub’s Codespaces billing docs](https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces)).
+- Progress lives in that Codespace’s files until the Codespace is deleted; it is separate from other players.
+
+Stop the Codespace when finished (**Codespaces → Stop / Delete**) so free hours are not used while idle.
+
+---
+
+## Quick start (local)
 
 ```bash
 cd tuxville_game          # this project folder
@@ -138,11 +168,12 @@ Avoid spoilers online if you can; the game is built to teach by exploration.
 
 ```text
 tuxville_game/
-  play.sh          # one-command launcher (recommended)
-  tuxville.sh          # builds / resumes the world
-  tuxville_art.sh      # ASCII art + colors
-  README.md        # this file
-  tuxville/        # generated game world (your save)
+  play.sh                 # one-command launcher (recommended)
+  tuxville.sh             # builds / resumes the world
+  tuxville_art.sh         # ASCII art + colors
+  README.md               # this file
+  .devcontainer/          # GitHub Codespaces / VS Code environment
+  tuxville/               # generated game world (your save; gitignored)
 ```
 
 `tuxville/` is created when you first play. You can back it up by copying that folder (or archiving it) if you want a manual snapshot.

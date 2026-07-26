@@ -1,0 +1,21 @@
+{
+  "name": "The Ruins of Tuxville",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "postCreateCommand": "chmod +x play.sh tuxville.sh && printf '\\n  Tuxville is ready.\\n  In the Terminal, run:\\n\\n    ./play.sh\\n\\n'",
+  "postStartCommand": "chmod +x play.sh tuxville.sh 2>/dev/null || true",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash",
+            "icon": "terminal-bash"
+          }
+        }
+      },
+      "extensions": []
+    }
+  },
+  "remoteUser": "vscode"
+}
